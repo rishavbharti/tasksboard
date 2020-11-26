@@ -4,11 +4,12 @@ import {
   DELETE_TASK,
   UPDATE_TASK,
 } from "../constants/taskConstants";
+import { url } from "../api/index";
 
 export const createTask = (listId, taskDetails) => async (dispatch) => {
   try {
     const { data } = await axios.post(
-      `https://tasksboard-app.herokuapp.com/api/list/${listId}/task`,
+      `${url}/list/${listId}/task`,
       taskDetails
     );
     dispatch({ type: CREATE_TASK, payload: data });
@@ -20,7 +21,7 @@ export const createTask = (listId, taskDetails) => async (dispatch) => {
 export const updateTask = (listId, taskId, taskUpdates) => async (dispatch) => {
   try {
     const { data } = await axios.patch(
-      `https://tasksboard-app.herokuapp.com/api/list/${listId}/task/${taskId}`,
+      `${url}/list/${listId}/task/${taskId}`,
       taskUpdates
     );
     // console.log(data);
@@ -32,9 +33,7 @@ export const updateTask = (listId, taskId, taskUpdates) => async (dispatch) => {
 
 export const deleteTask = (listId, taskId) => async (dispatch) => {
   try {
-    await axios.delete(
-      `https://tasksboard-app.herokuapp.com/api/list/${listId}/task/${taskId}`
-    );
+    await axios.delete(`${url}/list/${listId}/task/${taskId}`);
     dispatch({ type: DELETE_TASK });
   } catch (error) {
     console.log(error);

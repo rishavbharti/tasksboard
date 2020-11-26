@@ -6,12 +6,11 @@ import {
   GET_LISTS,
   UPDATE_LIST,
 } from "../constants/listConstants";
+import { url } from "../api/index";
 
 export const getLists = () => async (dispatch, getState) => {
   try {
-    const { data } = await axios.get(
-      "https://tasksboard-app.herokuapp.com/api/list"
-    );
+    const { data } = await axios.get(`${url}/list`);
     dispatch({ type: GET_LISTS, payload: data });
     // localStorage.setItem("lists", JSON.stringify(getState().lists));
   } catch (error) {
@@ -21,9 +20,7 @@ export const getLists = () => async (dispatch, getState) => {
 
 export const getList = (listId) => async (dispatch, getState) => {
   try {
-    const { data } = await axios.get(
-      `https://tasksboard-app.herokuapp.com/api/list/${listId}`
-    );
+    const { data } = await axios.get(`${url}/list/${listId}`);
     dispatch({ type: GET_LIST, payload: data });
   } catch (error) {
     console.log(error);
@@ -32,10 +29,7 @@ export const getList = (listId) => async (dispatch, getState) => {
 
 export const createList = (listDetails) => async (dispatch) => {
   try {
-    const { data } = await axios.post(
-      "https://tasksboard-app.herokuapp.com/api/list",
-      listDetails
-    );
+    const { data } = await axios.post(`${url}/list`, listDetails);
     dispatch({ type: CREATE_LIST, payload: data });
   } catch (error) {
     console.log(error);
@@ -44,10 +38,7 @@ export const createList = (listDetails) => async (dispatch) => {
 
 export const updateList = (listId, listUpdates) => async (dispatch) => {
   try {
-    const { data } = await axios.patch(
-      `https://tasksboard-app.herokuapp.com/api/list/${listId}`,
-      listUpdates
-    );
+    const { data } = await axios.patch(`${url}/list/${listId}`, listUpdates);
     dispatch({ type: UPDATE_LIST, payload: data });
   } catch (error) {
     console.log(error);
@@ -56,9 +47,7 @@ export const updateList = (listId, listUpdates) => async (dispatch) => {
 
 export const deleteList = (listId) => async (dispatch) => {
   try {
-    await axios.delete(
-      `https://tasksboard-app.herokuapp.com/api/list/${listId}`
-    );
+    await axios.delete(`${url}/list/${listId}`);
     dispatch({ type: DELETE_LIST });
   } catch (error) {
     console.log(error);
