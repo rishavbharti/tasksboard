@@ -35,6 +35,12 @@ const HomeScreen = () => {
           />
         ))}
       </div>
+      <footer style={{ textAlign: "center" }}>
+        Developed by{" "}
+        <a href="https://www.linkedin.com/in/rishavbharti/" target="_blank" rel="noreferrer">
+          Rishav Bharti
+        </a>
+      </footer>
     </Container>
   );
 };
